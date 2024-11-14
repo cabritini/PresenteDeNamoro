@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para meu amor</title>
+    <style>
+        body {
+            background: #f5f5f7;
+            color: #1d1d1f;
+            font-weight: 400;
+            font-family: "Sf Pro Display";
+            src: url(/Fontes/SF-Pro-Display-Regular.otf);
+        }
+        a {
+            color: currentColor;
+            text-decoration: none;
+            transition-property: transform, color;
+            transition-duration: 0.5s;
+            transition-timing-function: cubic-bezier();
+        }
+
+        .timer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem; /* Aumentado para espaçamento entre as caixas */
+            font-family: Arial, sans-serif;
+            font-size: 4vw;
+            margin-top: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bloco {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Alinhar ao topo */
+            text-align: center;
+        }
+
+        .caixa-timer {
+            width: 10vw;
+            height: 10vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: #1d1d1f;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease 0.1s;
+        }
+
+        .caixa-timer:hover {
+            background-color: #ff0239;
+            box-shadow: 0px 0px 55px 15px rgba(255, 0, 43, 1);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        .bloco:hover .palavra {
+            color: #1d1d1f;
+        }
+
+        .palavra {
+            font-size: 2vw;
+            color: #f5f5f7;
+            transition: color 0.3s ease;
+            margin-bottom: 15px; /* Distância entre a palavra e a caixa */
+            padding-top: 10px; /* Espaço adicional entre a palavra e o teto */
+        }
+
+        /* Adicionando padding no .bloco para garantir que as caixas não se separem */
+        .bloco {
+            padding-top: 10px; /* Aumentado para dar mais espaço ao topo */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <div class="bloco">
+            <div class="palavra">Dias</div>
+            <div id="dias" class="caixa-timer">Eu</div>
+        </div>
+        <div class="bloco">
+            <div class="palavra">Horas</div>
+            <div id="horas" class="caixa-timer">Te</div>
+        </div>
+        <div class="bloco">
+            <div class="palavra">Minutos</div>
+            <div id="minutos" class="caixa-timer">Amo</div>
+        </div>
+        <div class="bloco">
+            <div class="palavra">Segundos</div>
+            <div id="segundos" class="caixa-timer">Muito</div>
+        </div>
+    </div>       
+</body>
+<script>
+    const dataInicial = new Date("2024-09-21T18:48:00");
+
+    function Contador() {
+        const dataAtual = new Date();
+        const diferenca = dataAtual - dataInicial;
+        
+        const diasPassados = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        const horasPassadas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutosPassados = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+        const segundosPassados = Math.floor((diferenca % (1000 * 60)) / 1000);
+        
+        document.querySelector("#dias").innerHTML = String(diasPassados).padStart(2, '0');
+        document.querySelector("#horas").innerHTML = String(horasPassadas).padStart(2, '0');
+        document.querySelector("#minutos").innerHTML = String(minutosPassados).padStart(2, '0');
+        document.querySelector("#segundos").innerHTML = String(segundosPassados).padStart(2, '0');
+    }
+
+    setInterval(Contador, 1000);
+</script>
+</html>
